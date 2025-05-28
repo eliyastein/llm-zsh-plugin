@@ -79,6 +79,7 @@ _llm() {
                 'aliases:Manage model aliases'
                 'fragments:Manage stored fragments'
                 'schemas:Manage stored schemas'
+                'tools:Manage available tools'
             )
             _llm_describe_commands $commands
             ;;
@@ -363,6 +364,18 @@ _llm() {
                                     _llm_handle_options
                                 fi
                                 ;;
+                        esac
+                    fi
+                    ;;
+                tools)
+                    local -a tool_subcommands=(
+                        'list:List available tools'
+                    )
+                    if (( CURRENT == 2 )); then
+                        _llm_describe_subcommands $tool_subcommands
+                    else
+                        case $words[2] in
+                            list) _llm_handle_options ;;                            
                         esac
                     fi
                     ;;
